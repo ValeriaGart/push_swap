@@ -1,5 +1,0 @@
-1) check if input is correct;
-2) think about format of array, transform to right one;
-3) pass through algorithms;
-4) write the best result;
-5) free everything;

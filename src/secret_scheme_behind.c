@@ -1,83 +1,107 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   secret_scheme_behind.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/11 14:15:48 by vharkush          #+#    #+#             */
+/*   Updated: 2023/05/21 18:32:43 by vharkush         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incl/push_swap.h"
 
-void    ft_rrotate(t_stack *stack, int n, int n1, char cond)
+void	ft_rrotate(int *stack, int n, char ab)
 {
-    int tmp;
-    int i;
+	int	tmp;
+	int	i;
 
-    i = n + 1;
-    if (cond != 'b')
-    {
-        tmp = stack->a[n - 1];
-        while (--i > 1)
-            stack->a[i - 1] = stack->a[i - 2];
-        stack->a[0] = tmp;
-    }
-    i = n1 + 1;
-    if (cond != 'a')
-    {
-        tmp = stack->b[n1 - 1];
-        while (--i > 1)
-            stack->b[i - 1] = stack->b[i - 2];
-        stack->b[0] = tmp;
-    }
-    if (cond == 'a')
-        write(1, "rra\n", 4);
-    if (cond == 'b')
-        write(1, "rrb\n", 4);
-    if (cond == 'r')
-        write(1, "rrr\n", 4);
+	i = n;
+	tmp = stack[n - 1];
+	while (--i)
+		stack[i] = stack[i - 1];
+	stack[0] = tmp;
+	if (ab == 'a')
+		write(1, "rra\n", 4);
 }
 
-void    ft_rotate(t_stack *stack, int n, int n1, char cond)
+void	ft_rotate(int *stack, int n, char cond)
 {
-    int tmp;
-    int i;
+	int	tmp;
+	int	i;
 
-    i = 0;
-    if (cond != 'b')
-    {
-        tmp = stack->a[0];
-        while (++i < n)
-            stack->a[i - 1] = stack->a[i];
-        stack->a[n - 1] = tmp;
-    }
-    i = 0;
-    if (cond != 'a')
-    {
-        tmp = stack->b[0];
-        while (++i < n1)
-            stack->b[i - 1] = stack->b[i];
-        stack->b[n1 - 1] = tmp;
-    }
-    if (cond == 'a')
-        write(1, "ra\n", 3);
-    if (cond == 'b')
-        write(1, "rb\n", 3);
-    if (cond == 'r')
-        write(1, "rr\n", 3);
+	i = 0;
+	tmp = stack[0];
+	while (++i < n)
+	{
+		stack[i - 1] = stack[i];
+	}
+	stack[n - 1] = tmp;
+	if (cond == 'a')
+		write(1, "ra\n", 3);
+	if (cond == 'b')
+		write(1, "rb\n", 3);
+	if (cond == 'r')
+		write(1, "rr\n", 3);
 }
 
-void    ft_swap1(t_stack *stack, char cond)
+void	ft_swap1(int *stack, char cond)
 {
-    int tmp;
+	int	tmp;
 
-    if (cond != 'b')
-    {
-        tmp = stack->a[0];
-        stack->a[0] = stack->a[1];
-        stack->a[1] = tmp;
-    }
-    if (cond != 'a')
-    {
-        tmp = stack->b[0];
-        stack->b[0] = stack->b[1];
-        stack->b[1] = tmp;
-    }
-    if (cond == 'a')
-        write(1, "sa\n", 3);
-    if (cond == 'b')
-        write(1, "sb\n", 3);
-    if (cond == 's')
-        write(1, "ss\n", 3);
+	if (cond != 'b')
+	{
+		tmp = stack[0];
+		stack[0] = stack[1];
+		stack[1] = tmp;
+		write(1, "sa\n", 3);
+	}
+	if (cond != 'a')
+	{
+		tmp = stack[0];
+		stack[0] = stack[1];
+		stack[1] = tmp;
+		write(1, "sb\n", 3);
+	}
+}
+
+void	ft_push_opp_to_cur(t_list_num *cur, t_list_num *cur_opp,
+							t_list_num *one_bef_last)
+{
+	int			i;
+	int			j;
+	int			n;
+	t_list_num	*tmp;
+
+	j = -1;
+	tmp = cur_opp;
+	i = cur->n - 1;
+	n = i;
+	while (++i <= (cur_opp->n + n))
+	{
+		if (cur_opp->stack == 'a')
+			write(1, "pb\n", 3);
+		else
+			write(1, "pa\n", 3);
+		ft_rrotate(cur->arr, cur->n_orig, 'c');
+		cur->arr[0] = cur_opp->arr[++j];
+	}
+	cur->n = i;
+	free (cur_opp->arr);
+	free (cur_opp);
+	one_bef_last->next = NULL;
+}
+
+t_list_num	*ft_last_opp(t_list_num *cur, t_list_num *a, t_list_num *b)
+{
+	t_list_num	*ret;
+
+	if (cur->stack == 'a')
+		ret = b;
+	else
+		ret = a;
+	while (ret->next != NULL)
+		ret = ret->next;
+	return (ret);
 }

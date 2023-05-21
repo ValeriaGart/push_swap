@@ -5,10 +5,11 @@ NAME = push_swap
 SRCS =	src/push_swap.c					\
 		src/check_input.c				\
 		src/free.c						\
-		src/recursive_sort.c			\
-		src/secret_scheme_behind.c		\
-		src/sort_prepare.c   			\
-		src/utils.c
+		src/sort1.c						\
+		src/utils.c						\
+		src/short_sort.c				\
+		src/split_blah_blahs.c			\
+		src/secret_scheme_behind.c
 
 CC = cc
 
@@ -25,10 +26,11 @@ $(NAME): $(OBJS)
 all:    $(NAME)
 
 clean:
-		$(MAKE) -C ./libft
+		$(MAKE) clean -C ./libft
 		rm -rf $(OBJS)
 
 fclean: clean
+		$(MAKE) fclean -C ./libft
 		rm -rf $(NAME)
 
 re: fclean all
