@@ -69,12 +69,77 @@ int	ft_corr_place(int *sorted, int cur, int follow, int n)
 
 void	ft_pa(t_list_num *a, t_list_num *b)
 {
+	t_list_num *tmp;
+
+	tmp = b;
+	while (tmp->next)
+		tmp = tmp->next;
 	a->n += 1;
 	ft_rrotate(a->arr, a->n, 'c');
-	a->arr[0] = b->arr[0];
-	ft_rotate(b->arr, b->n, 'c');
-	b->n -= 1;
+	a->arr[0] = tmp->arr[0];
+	ft_rotate(tmp->arr, tmp->n, 'c');
+	tmp->n -= 1;
+	if (tmp->n == 0)
+	{
+		tmp = b;
+		if (tmp->next)
+		{
+			while (tmp->next->next)
+				tmp = tmp->next;
+			free(tmp->next->arr);
+			free(tmp->next);
+			tmp->next = NULL;
+		}
+		else
+		{
+			free(tmp->arr);
+			free(tmp);
+		}
+	}
 	write(1, "pa\n", 3);
+}
+
+int ft_last_b_arr(t_list_num *b)
+{
+	t_list_num *tmp;
+
+	tmp = b;
+	while (tmp->next)
+		tmp = tmp->next;
+	return (tmp->arr[0]);
+}
+
+void	ft_rotb(t_list_num *b)
+{
+	int	tmp;
+	int	i;
+	int *stack;
+	int	n;
+	t_list_num *tmpar;
+
+	tmpar = b;
+	while (tmpar->next)
+		tmpar = tmpar->next;
+	n = tmpar->n;
+	stack = tmpar->arr;
+	i = 0;
+	tmp = stack[0];
+	while (++i < n)
+	{
+		stack[i - 1] = stack[i];
+	}
+	stack[n - 1] = tmp;
+	write(1, "rb\n", 3);
+}
+
+int	ft_last_b(t_list_num *b)
+{
+	t_list_num *tmp;
+
+	tmp = b;
+	while (tmp->next)
+		tmp = tmp->next;
+	return (tmp->n);
 }
 
 void	ft_solve(t_list_num *a, t_list_num *b)
@@ -104,19 +169,19 @@ void	ft_solve(t_list_num *a, t_list_num *b)
 		{
 			if (ft_corr_place(sorted, a->arr[a->n - 1], a->arr[0], a->n_orig))
 				ft_rrotate(a->arr, a->n, 'a');
-			else if (ft_corr_place(sorted, b->arr[0], a->arr[0], a->n_orig))
+			else if (ft_corr_place(sorted, ft_last_b_arr(b), a->arr[0], a->n_orig))
 				ft_pa(a, b);
-			else if (b->arr[0] > a->arr[a->n - 1])
+			else if (ft_last_b_arr(b) > a->arr[a->n - 1])
 			{
 				ft_pa(a, b);
 				ft_rotate(a->arr, a->n, 'a');
 			}
 			else
 			{
-				ft_rotate(b->arr, b->n, 'b');
+				ft_rotb(b);
 				b->rots++;
 			}
-			if (b->rots == b->n && b->n != 0)
+			if (b->rots == ft_last_b(b) && ft_last_b(b) != 0)
 				while (b->rots != 0)
 				{
 					b->rots--;

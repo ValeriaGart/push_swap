@@ -6,7 +6,7 @@
 /*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 21:06:01 by vharkush          #+#    #+#             */
-/*   Updated: 2023/05/11 14:07:24 by vharkush         ###   ########.fr       */
+/*   Updated: 2023/05/23 13:57:47 by vharkush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	ft_iff_sorted(int *num_arr, int n, char dir)
 		dir = '>';
 	while (++i < n - 1)
 	{
-		if (num_arr[i + 1] && num_arr[i + 1] > num_arr[i] && dir == '<')
+		if (num_arr[i + 1] > num_arr[i] && dir == '<')
 			count++;
-		if (num_arr[i + 1] && num_arr[i + 1] < num_arr[i] && dir == '>')
+		if (num_arr[i + 1] < num_arr[i] && dir == '>')
 			count++;
 	}
 	if (count == n - 1)
