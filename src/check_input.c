@@ -6,7 +6,7 @@
 /*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 21:04:10 by vharkush          #+#    #+#             */
-/*   Updated: 2023/05/13 11:43:45 by vharkush         ###   ########.fr       */
+/*   Updated: 2023/05/24 14:51:06 by vharkush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,19 @@ void	ft_if_num(int *i, int *j, char **av, t_num_arr *num_arr)
 	free(num_arr->tmp);
 }
 
-int	ft_check_errors(char **av, int *i, int *j, int n)
+int	ft_check_errors(char **av, int *i, int *j, t_num_arr *num_arr)
 {
+	int	n;
+
+	n = 0;
 	while (av[*i][*j] == ' ')
 		(*j)++;
 	if (ft_strchr("+-", av[*i][*j]))
 	{
 		if (av[*i][*j - 1] && !ft_strchr(" ", av[*i][*j - 1]))
-			ft_error_exit("Wrong digits or not digits", 26);
+			ft_free_exit(num_arr, "Wrong digits or not digits", 26);
 		if (!av[*i][*j + 1] || !ft_strchr("0123456789", av[*i][*j + 1]))
-			ft_error_exit("Wrong digits or not digits", 26);
+			ft_free_exit(num_arr, "Wrong digits or not digits", 26);
 		(*j)++;
 	}
 	if (ft_strchr("0123456789", av[*i][*j]))
@@ -84,11 +87,11 @@ int	ft_check_errors(char **av, int *i, int *j, int n)
 	while (av[*i][*j] != 0 && ft_strchr("0123456789", av[*i][*j]))
 		(*j)++;
 	if (!(ft_strchr("0123456789+- ", av[*i][*j])) && av[*i][*j])
-		ft_error_exit("Wrong digits or not digits", 26);
+		ft_free_exit(num_arr, "Wrong digits or not digits", 26);
 	return (n);
 }
 
-int	ft_count_nums(char **av, int ac)
+int	ft_count_nums(char **av, int ac, t_num_arr *num_arr)
 {
 	int	i;
 	int	j;
@@ -102,7 +105,7 @@ int	ft_count_nums(char **av, int ac)
 		if (!av[i][j])
 			ft_increase_i_reset_j(&i, &j);
 		else
-			n += ft_check_errors(av, &i, &j, 0);
+			n += ft_check_errors(av, &i, &j, num_arr);
 	}
 	return (n);
 }
@@ -116,10 +119,10 @@ void	ft_check_str(int ac, char **av, t_num_arr *num_arr)
 	j = 0;
 	num_arr->ac = ac;
 	num_arr->i = 0;
-	num_arr->n = ft_count_nums(av, ac);
+	num_arr->n = ft_count_nums(av, ac, num_arr);
 	num_arr->num_arr = malloc(num_arr->n * sizeof(int));
-	if (!num_arr->num_arr)
-		ft_error_exit("Malloc failed:-(\n", 17);
+	if (!num_arr->num_arr || num_arr->n == 1)
+		ft_free_exit(num_arr, "Malloc failed:-(\n", 17);
 	while (i < ac)
 	{
 		if (av[i][j] == '\0')

@@ -5,8 +5,9 @@ NAME = push_swap
 SRCS =	src/push_swap.c					\
 		src/check_input.c				\
 		src/free.c						\
-		src/sort1.c						\
+		src/sort.c						\
 		src/utils.c						\
+		src/utils2.c						\
 		src/short_sort.c				\
 		src/split_blah_blahs.c			\
 		src/secret_scheme_behind.c

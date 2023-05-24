@@ -6,7 +6,7 @@
 /*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 21:20:43 by vharkush          #+#    #+#             */
-/*   Updated: 2023/05/23 20:39:14 by vharkush         ###   ########.fr       */
+/*   Updated: 2023/05/24 15:02:02 by vharkush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,6 @@ void	ft_split_half(t_list_num **a, t_list_num **b, t_list_num *cur)
 		cur_opp->n_orig = cur_opp->n;
 	}
 	ft_cur_change(cur, mid);
-}
-void	ft_leave_it_here(t_list_num	*to, t_list_num	*from,
-						t_list_num	*last_opp)
-{
-	int	i;
-
-	i = 0;
-	last_opp->n_orig = last_opp->n;
-	while (++i <= from->n)
-		ft_rrotate(to->arr, to->n + i, 'c');
-	i = -1;
-	to->n += from->n;
-	//if (to->n_orig < to->n)
-	//	to->n = to->n_orig;
-	while (from->n != 0)
-	{
-		to->arr[from->n - 1] = from->arr[from->n - 1];
-		from->n -= 1;
-	}
-	free(from->arr);
-	free(from);
-	to->next = NULL;
 }
 
 void	ft_push_back(t_list_num *cur, t_list_num *a, t_list_num *b)
@@ -83,16 +61,8 @@ void	ft_recurs_solve(t_list_num *cur, t_list_num *a, t_list_num *b)
 
 	while (!ft_iff_sorted(cur->arr, cur->n, cur->stack))
 	{
-		if (cur->n == 2)
-		{
-			ft_swap1(cur->arr, cur->stack);
+		if (ft_special_ifs(cur))
 			break ;
-		}
-		if (cur->n == 3 && cur->ind == 0)
-		{
-			ft_short_sort(cur);
-			break ;
-		}
 		if (cur->stack == 'b' && a->next)
 		{
 			if (!a->next->next && cur->ind < 1)

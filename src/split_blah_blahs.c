@@ -6,7 +6,7 @@
 /*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:10:06 by vharkush          #+#    #+#             */
-/*   Updated: 2023/05/12 12:50:44 by vharkush         ###   ########.fr       */
+/*   Updated: 2023/05/24 14:52:05 by vharkush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	write_a(t_list_num *cur, t_list_num *cur_opp, int mid)
 			write(1, "ra\n", 3);
 		}
 	}
-	while (--n  && cur->ind != 0)
+	while (--n && cur->ind != 0)
 		write(1, "rra\n", 4);
 }
 

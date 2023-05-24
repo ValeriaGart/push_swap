@@ -6,7 +6,7 @@
 /*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 13:11:33 by vharkush          #+#    #+#             */
-/*   Updated: 2023/05/21 20:00:08 by vharkush         ###   ########.fr       */
+/*   Updated: 2023/05/24 15:03:06 by vharkush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_list_num
 
 int			ft_iff_sorted(int *num_arr, int n, char dir);
 int			ft_mid_ax(int *num_arr, int n, int stack);
+int			ft_special_ifs(t_list_num *cur);
 void		ft_add_back(t_list_num ***ab, t_list_num *cur_opp);
 void		ft_cpy_to_cur(int *from, int *to, int n);
 void		ft_cur_change(t_list_num *cur, int mid);
@@ -72,6 +73,8 @@ void		write_b(t_list_num *cur, t_list_num *cur_opp, int mid);
 void		ft_write_the_rest(int i);
 void		ft_push_opp_to_cur(t_list_num *cur, t_list_num *cur_opp,
 				t_list_num *one_bef_last);
+void	ft_leave_it_here(t_list_num	*to, t_list_num	*from,
+				t_list_num	*last_opp);
 t_list_num	*ft_cur_opp(t_list_num *cur, t_list_num *cur_opp, int mid);
 t_list_num	*ft_last_opp(t_list_num *cur, t_list_num *a, t_list_num *b);
 
