@@ -181,7 +181,7 @@ void	ft_solve(t_list_num *a, t_list_num *b)
 				ft_rotb(b);
 				b->rots++;
 			}
-			if (b->rots == ft_last_b(b) && ft_last_b(b) != 0)
+		if (b->rots == ft_last_b(b) && ft_last_b(b) != 0)
 				while (b->rots != 0)
 				{
 					b->rots--;

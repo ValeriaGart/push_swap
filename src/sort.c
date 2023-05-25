@@ -6,7 +6,7 @@
 /*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 21:20:43 by vharkush          #+#    #+#             */
-/*   Updated: 2023/05/24 15:02:02 by vharkush         ###   ########.fr       */
+/*   Updated: 2023/05/25 10:53:54 by vharkush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ void	ft_recurs_solve(t_list_num *cur, t_list_num *a, t_list_num *b)
 	{
 		if (ft_special_ifs(cur))
 			break ;
+		ft_split_half(&a, &b, cur);
 		if (cur->stack == 'b' && a->next)
 		{
-			if (!a->next->next && cur->ind < 1)
+			if (!a->next->next)
 				ft_recurs_solve(a->next, a, b);
 		}
-		ft_split_half(&a, &b, cur);
 	}
 	while (cur->n != cur->n_orig)
 	{

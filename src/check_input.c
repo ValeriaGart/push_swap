@@ -6,7 +6,7 @@
 /*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 21:04:10 by vharkush          #+#    #+#             */
-/*   Updated: 2023/05/24 14:51:06 by vharkush         ###   ########.fr       */
+/*   Updated: 2023/05/25 13:06:37 by vharkush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,30 @@ int	ft_strsinstr(char **first, char *second, int ac, int n)
 	return (n);
 }
 
+int	ft_check_doubles(int *arr, int n)
+{
+	int tmp;
+	int	i;
+	int	j;
+	int	res;
+
+	i = 0;
+	res = 0;
+	while (i < n)
+	{
+		tmp = arr[i];
+		j = 0;
+		while (j < n)
+		{
+			if (tmp == arr[j])
+				res++;
+			j++;
+		}
+		i++;
+	}
+	return (res);
+}
+
 void	ft_if_num(int *i, int *j, char **av, t_num_arr *num_arr)
 {
 	int	ind1;
@@ -60,9 +84,9 @@ void	ft_if_num(int *i, int *j, char **av, t_num_arr *num_arr)
 	if (!num_arr->tmp)
 		ft_free_exit(num_arr, "Malloc failed\n", 14);
 	ft_strlcpy(num_arr->tmp, (char *)(av[*i] + ind1), num_len);
-	if (ft_strsinstr(av, num_arr->tmp, num_arr->ac, 0) > 1)
-		ft_free_exit(num_arr, "More than 2 same nums\n", 22);
-	num_arr->num_arr[num_arr->i] = atoi(num_arr->tmp);
+	//if (ft_strsinstr(av, num_arr->tmp, num_arr->ac, 0) > 1)
+	//	ft_free_exit(num_arr, "More than 2 same nums\n", 22);
+	num_arr->num_arr[num_arr->i] = ft_atoi(num_arr->tmp);
 	num_arr->i += 1;
 	free(num_arr->tmp);
 }

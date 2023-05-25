@@ -72,10 +72,8 @@ void	ft_push_opp_to_cur(t_list_num *cur, t_list_num *cur_opp,
 	int			i;
 	int			j;
 	int			n;
-	t_list_num	*tmp;
 
 	j = -1;
-	tmp = cur_opp;
 	i = cur->n - 1;
 	n = i;
 	while (++i <= (cur_opp->n + n))
