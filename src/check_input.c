@@ -6,69 +6,44 @@
 /*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 21:04:10 by vharkush          #+#    #+#             */
-/*   Updated: 2023/05/25 13:06:37 by vharkush         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:39:41 by vharkush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/push_swap.h"
 
-int	ft_strsinstr(char **first, char *second, int ac, int n)
+long	ft_atol(char *str)
 {
-	int	j;
-	int	i;
-	int	i1;
-
-	i = 1;
-	j = 0;
-	if (!(*first) || !second)
-		return (-1);
-	while (i < ac)
-	{
-		if (first[i][j] == second[0] && (((j - 1 > -1)
-			&& !(ft_strchr("1234567890+-", first[i][j - 1]))) || j - 1 == -1))
-		{
-			i1 = -1;
-			while (second[++i1] && first[i][j] == second[i1])
-				j++;
-			if (second[i1] == '\0' && (first[i][j] == ' ' || !first[i][j]))
-				n++;
-		}
-		if (first[i][j] && first[i][j + 1])
-			j++;
-		else if (!first[i][j] || first[i][j + 1] == '\0')
-			ft_increase_i_reset_j(&i, &j);
-	}
-	return (n);
-}
-
-int	ft_check_doubles(int *arr, int n)
-{
-	int tmp;
-	int	i;
-	int	j;
-	int	res;
+	int		i;
+	int		sign;
+	long	my_long;
 
 	i = 0;
-	res = 0;
-	while (i < n)
+	my_long = 0;
+	sign = 0;
+	if (!str)
+		return (0);
+	while (str[i] == ' ')
+		i++;
+	if (str[i] == '-')
+		sign++;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (ft_isdigit(str[i]))
 	{
-		tmp = arr[i];
-		j = 0;
-		while (j < n)
-		{
-			if (tmp == arr[j])
-				res++;
-			j++;
-		}
+		my_long = my_long * 10 + str[i] - '0';
 		i++;
 	}
-	return (res);
+	if (sign)
+		my_long *= -1;
+	return (my_long);
 }
 
 void	ft_if_num(int *i, int *j, char **av, t_num_arr *num_arr)
 {
 	int	ind1;
 	int	num_len;
+	long	tmp;
 
 	ind1 = *j;
 	num_len = 1;
@@ -84,11 +59,13 @@ void	ft_if_num(int *i, int *j, char **av, t_num_arr *num_arr)
 	if (!num_arr->tmp)
 		ft_free_exit(num_arr, "Malloc failed\n", 14);
 	ft_strlcpy(num_arr->tmp, (char *)(av[*i] + ind1), num_len);
-	//if (ft_strsinstr(av, num_arr->tmp, num_arr->ac, 0) > 1)
-	//	ft_free_exit(num_arr, "More than 2 same nums\n", 22);
-	num_arr->num_arr[num_arr->i] = ft_atoi(num_arr->tmp);
+	tmp = ft_atol(num_arr->tmp);
+	if (tmp > 2147483648 || tmp < -2147483649)
+		ft_free_exit(num_arr, "Not int range\n", 15);
+	num_arr->num_arr[num_arr->i] = (int)tmp;
 	num_arr->i += 1;
 	free(num_arr->tmp);
+	num_arr->tmp = NULL;
 }
 
 int	ft_check_errors(char **av, int *i, int *j, t_num_arr *num_arr)
@@ -154,4 +131,6 @@ void	ft_check_str(int ac, char **av, t_num_arr *num_arr)
 		else
 			ft_if_num(&i, &j, av, num_arr);
 	}
+	if (ft_check_doubles(num_arr->num_arr, num_arr->n))
+		ft_free_exit(num_arr, "More than 2 same nums\n", 22);
 }

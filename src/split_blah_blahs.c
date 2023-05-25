@@ -6,7 +6,7 @@
 /*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:10:06 by vharkush          #+#    #+#             */
-/*   Updated: 2023/05/24 14:52:05 by vharkush         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:07:17 by vharkush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,11 @@ t_list_num	*ft_cur_opp(t_list_num *cur, t_list_num *cur_opp, int mid)
 	cur_opp = malloc(sizeof(t_list_num));
 	if (!cur_opp)
 		exit (1);
+	ft_set_to_null(cur_opp);
 	cur_opp->n = j;
 	cur_opp->arr = malloc(sizeof(int) * (j));
+	if (!cur_opp->arr)
+		exit (1);
 	if (cur->stack == 'a')
 		write_a(cur, cur_opp, mid);
 	if (cur->stack == 'b')
