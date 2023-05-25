@@ -6,7 +6,7 @@
 /*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 21:04:10 by vharkush          #+#    #+#             */
-/*   Updated: 2023/05/25 16:39:41 by vharkush         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:57:00 by vharkush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	ft_check_errors(char **av, int *i, int *j, t_num_arr *num_arr)
 	n = 0;
 	while (av[*i][*j] == ' ')
 		(*j)++;
-	if (ft_strchr("+-", av[*i][*j]))
+	if (av[*i][*j] != '\0' && ft_strchr("+-", av[*i][*j]))
 	{
 		if (av[*i][*j - 1] && !ft_strchr(" ", av[*i][*j - 1]))
 			ft_free_exit(num_arr, "Wrong digits or not digits", 26);
@@ -83,11 +83,11 @@ int	ft_check_errors(char **av, int *i, int *j, t_num_arr *num_arr)
 			ft_free_exit(num_arr, "Wrong digits or not digits", 26);
 		(*j)++;
 	}
-	if (ft_strchr("0123456789", av[*i][*j]))
+	if (av[*i][*j] != '\0' && ft_strchr("0123456789", av[*i][*j]))
 		n++;
-	while (av[*i][*j] != 0 && ft_strchr("0123456789", av[*i][*j]))
+	while (av[*i][*j] != '\0' && ft_strchr("0123456789", av[*i][*j]))
 		(*j)++;
-	if (!(ft_strchr("0123456789+- ", av[*i][*j])) && av[*i][*j])
+	if (!(av[*i][*j] != '\0' && ft_strchr("0123456789+- ", av[*i][*j])))
 		ft_free_exit(num_arr, "Wrong digits or not digits", 26);
 	return (n);
 }
@@ -116,6 +116,13 @@ void	ft_check_str(int ac, char **av, t_num_arr *num_arr)
 	int	i;
 	int	j;
 
+	i = 0;
+	j = 0;
+	while (++j < ac)
+		if (av[j][0] == '\0')
+			i++;
+	if (i == ac - 1)
+		ft_free_exit(num_arr, "give some nums heyo\n", 20);
 	i = 1;
 	j = 0;
 	num_arr->ac = ac;
