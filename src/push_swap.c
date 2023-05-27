@@ -6,7 +6,7 @@
 /*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 13:13:54 by vharkush          #+#    #+#             */
-/*   Updated: 2023/05/25 17:46:01 by vharkush         ###   ########.fr       */
+/*   Updated: 2023/05/27 09:24:03 by vharkush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ int	main(int ac, char **av)
 		return (1);
 	num_arr = ft_init_numarr();
 	ft_check_str(ac, av, num_arr);
-	ft_sort_all(num_arr->num_arr, num_arr->n);
+	if (num_arr->n != 0)
+		ft_sort_all(num_arr->num_arr, num_arr->n);
+	else
+		write(1, "no nums bruv:(\n", 15);
 	free(num_arr->stack);
 	free(num_arr->num_arr);
 	free(num_arr);
 	return (0);
 }
-/*for (int i = 0; i < num_arr.n; i++)
-		printf("%d\t", num_arr.num_arr[i]);*/

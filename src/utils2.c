@@ -6,7 +6,7 @@
 /*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:04:00 by vharkush          #+#    #+#             */
-/*   Updated: 2023/05/25 17:00:52 by vharkush         ###   ########.fr       */
+/*   Updated: 2023/05/27 08:13:12 by vharkush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,18 @@ void	ft_set_to_null(t_list_num *arr)
 	arr->stack = 0;
 	arr->next = NULL;
 	arr->arr = NULL;
+}
+
+void	ft_if_all_args_empty(int ac, char **av, t_num_arr *num_arr)
+{
+	int i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (++j < ac)
+		if (av[j][0] == '\0')
+			i++;
+	if (i == ac - 1)
+		ft_free_exit(num_arr, "give some nums heyo\n", 20);
 }

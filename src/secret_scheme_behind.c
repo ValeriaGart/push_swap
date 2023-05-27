@@ -6,7 +6,7 @@
 /*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:15:48 by vharkush          #+#    #+#             */
-/*   Updated: 2023/05/25 17:11:19 by vharkush         ###   ########.fr       */
+/*   Updated: 2023/05/26 16:03:58 by vharkush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,9 @@ void	ft_push_opp_to_cur(t_list_num *cur, t_list_num *cur_opp,
 		cur->arr[0] = cur_opp->arr[++j];
 	}
 	cur->n = i;
+	one_bef_last->next = NULL;
 	free (cur_opp->arr);
 	free (cur_opp);
-	if (one_bef_last)
-		one_bef_last->next = NULL;
 }
 
 t_list_num	*ft_last_opp(t_list_num *cur, t_list_num *a, t_list_num *b)

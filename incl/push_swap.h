@@ -6,7 +6,7 @@
 /*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 13:11:33 by vharkush          #+#    #+#             */
-/*   Updated: 2023/05/25 17:01:12 by vharkush         ###   ########.fr       */
+/*   Updated: 2023/05/27 09:23:52 by vharkush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void		ft_add_back(t_list_num ***ab, t_list_num *cur_opp);
 void		ft_cpy_to_cur(int *from, int *to, int n);
 void		ft_cur_change(t_list_num *cur, int mid);
 void		ft_check_str(int ac, char **av, t_num_arr *num_arr);
-void		ft_sort_all(int *arr, int n);
 void		ft_short_sort(t_list_num *cur);
 void		ft_swap1(int *stack, char cond);
 void		ft_rotate(int *stack, int n, char cond);
@@ -72,10 +71,12 @@ void		ft_increase_i_reset_j(int *i, int *j);
 void		write_a(t_list_num *cur, t_list_num *cur_opp, int mid);
 void		write_b(t_list_num *cur, t_list_num *cur_opp, int mid);
 void		ft_write_the_rest(int i);
+void		ft_if_all_args_empty(int ac, char **av, t_num_arr *num_arr);
 void		ft_push_opp_to_cur(t_list_num *cur, t_list_num *cur_opp,
 				t_list_num *one_bef_last);
 void		ft_leave_it_here(t_list_num	*to, t_list_num	*from,
 				t_list_num	*last_opp);
+void		ft_sort_all(int *arr, int n);
 void		ft_set_to_null(t_list_num *arr);
 t_list_num	*ft_cur_opp(t_list_num *cur, t_list_num *cur_opp, int mid);
 t_list_num	*ft_last_opp(t_list_num *cur, t_list_num *a, t_list_num *b);

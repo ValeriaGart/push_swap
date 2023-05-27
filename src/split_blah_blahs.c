@@ -6,7 +6,7 @@
 /*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:10:06 by vharkush          #+#    #+#             */
-/*   Updated: 2023/05/25 17:07:17 by vharkush         ###   ########.fr       */
+/*   Updated: 2023/05/27 09:58:24 by vharkush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,9 @@ t_list_num	*ft_cur_opp(t_list_num *cur, t_list_num *cur_opp, int mid)
 	int	j;
 
 	j = cur->n / 2;
-	cur_opp = malloc(sizeof(t_list_num));
+	cur_opp = malloc(sizeof(t_list_num) * sizeof(void *));
 	if (!cur_opp)
-		exit (1);
+		return (NULL);
 	ft_set_to_null(cur_opp);
 	cur_opp->n = j;
 	cur_opp->arr = malloc(sizeof(int) * (j));
