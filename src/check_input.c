@@ -6,12 +6,11 @@
 /*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 21:04:10 by vharkush          #+#    #+#             */
-/*   Updated: 2023/05/27 08:14:01 by vharkush         ###   ########.fr       */
+/*   Updated: 2023/05/28 10:15:32 by vharkush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/push_swap.h"
-
 
 long	ft_atol(char *str)
 {
@@ -42,8 +41,8 @@ long	ft_atol(char *str)
 
 void	ft_if_num(int *i, int *j, char **av, t_num_arr *num_arr)
 {
-	int	ind1;
-	int	num_len;
+	int		ind1;
+	int		num_len;
 	long	tmp;
 
 	ind1 = *j;
@@ -76,7 +75,7 @@ int	ft_check_errors(char **av, int *i, int *j, t_num_arr *num_arr)
 	n = 0;
 	while (av[*i][*j] == ' ')
 		(*j)++;
-	if ( av[*i][*j] == '+' || av[*i][*j] == '-')
+	if (av[*i][*j] == '+' || av[*i][*j] == '-')
 	{
 		if (av[*i][*j - 1] && !ft_strchr(" ", av[*i][*j - 1]))
 			ft_free_exit(num_arr, "Wrong digits or not digits\n", 27);

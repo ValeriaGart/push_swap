@@ -6,7 +6,7 @@
 /*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 15:04:00 by vharkush          #+#    #+#             */
-/*   Updated: 2023/05/27 08:13:12 by vharkush         ###   ########.fr       */
+/*   Updated: 2023/05/28 10:51:10 by vharkush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_check_doubles(int *arr, int n)
 {
-	int tmp;
+	int	tmp;
 	int	i;
 	int	j;
 	int	res;
@@ -24,7 +24,6 @@ int	ft_check_doubles(int *arr, int n)
 	while (i < n)
 	{
 		tmp = arr[i];
-
 		j = 0;
 		while (j < n)
 		{
@@ -60,26 +59,34 @@ void	ft_leave_it_here(t_list_num	*to, t_list_num	*from,
 	to->next = NULL;
 }
 
-int	ft_special_ifs(t_list_num *cur)
+int	ft_special_ifs(t_list_num *cur, t_list_num *a, t_list_num *b, int n)
 {
-	if (cur->n == 2)
+	if (!n)
 	{
-		ft_swap1(cur->arr, cur->stack);
-		return (1);
+		if (cur->n == 2)
+		{
+			ft_swap1(cur->arr, cur->stack);
+			return (0);
+		}
+		if (cur->n == 3 && cur->ind == 0)
+		{
+			ft_short_sort(cur);
+			return (0);
+		}
 	}
-	if (cur->n == 3 && cur->ind == 0)
+	if (n)
 	{
-		ft_short_sort(cur);
-		return (1);
+		if (!(cur->stack == 'a' && cur->ind == 0))
+			ft_push_back(cur, a, b);
 	}
-	return (0);
+	return (1);
 }
 
 void	ft_set_to_null(t_list_num *arr)
 {
 	arr->ind = 0;
 	arr->n = 0;
-	arr->n_orig =0;
+	arr->n_orig = 0;
 	arr->rots = 0;
 	arr->stack = 0;
 	arr->next = NULL;
@@ -88,7 +95,7 @@ void	ft_set_to_null(t_list_num *arr)
 
 void	ft_if_all_args_empty(int ac, char **av, t_num_arr *num_arr)
 {
-	int i;
+	int	i;
 	int	j;
 
 	i = 0;

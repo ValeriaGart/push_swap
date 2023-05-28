@@ -6,7 +6,7 @@
 /*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 21:20:43 by vharkush          #+#    #+#             */
-/*   Updated: 2023/05/27 10:03:06 by vharkush         ###   ########.fr       */
+/*   Updated: 2023/05/28 10:51:36 by vharkush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_split_half(t_list_num **a, t_list_num **b, t_list_num *cur)
 
 	cur_opp = NULL;
 	mid = ft_mid_ax(cur->arr, cur->n, cur->stack);
-	cur_opp = NULL;//ft_cur_opp(cur, cur_opp, mid);
+	cur_opp = ft_cur_opp(cur, cur_opp, mid);
 	if (cur_opp == NULL)
 		return (0);
 	if (cur->stack == 'a')
@@ -58,13 +58,13 @@ void	ft_push_back(t_list_num *cur, t_list_num *a, t_list_num *b)
 		ft_leave_it_here(one_bef_last, cur, last_opp);
 }
 
-int	ft_recurs_solve(t_list_num *cur, t_list_num *a, t_list_num *b, int 	ret)
+int	ft_recurs_solve(t_list_num *cur, t_list_num *a, t_list_num *b, int ret)
 {
 	t_list_num	*last_opp;
 
 	while (!ft_iff_sorted(cur->arr, cur->n, cur->stack))
 	{
-		if (ft_special_ifs(cur))
+		if (!ft_special_ifs(cur, a, b, 0))
 			break ;
 		ret = ft_split_half(&a, &b, cur);
 		if (!ret)
@@ -84,9 +84,7 @@ int	ft_recurs_solve(t_list_num *cur, t_list_num *a, t_list_num *b, int 	ret)
 		if (!ret)
 			return (ret);
 	}
-	if (!(cur->stack == 'a' && cur->ind == 0))
-		ft_push_back(cur, a, b);
-	return (1);
+	return (ft_special_ifs(cur, a, b, 1));
 }
 
 void	ft_store_first_node(int *arr, t_list_num *a, int n)
@@ -99,7 +97,7 @@ void	ft_store_first_node(int *arr, t_list_num *a, int n)
 	a->next = NULL;
 }
 
-void	ft_sort_all(int *arr, int n)
+void	ft_sort_all(t_num_arr	*num_arr, int *arr, int n)
 {
 	t_list_num	a;
 	t_list_num	*b;
@@ -109,5 +107,9 @@ void	ft_sort_all(int *arr, int n)
 	ft_store_first_node(arr, &a, n);
 	res = ft_recurs_solve(&a, &a, b, 0);
 	if (!res)
-		exit (1);
+	{
+		ft_free_all_u_can_reee(&a, b);
+		free(num_arr);
+		ft_error_exit("Malloc failed:(((\n", 18);
+	}
 }

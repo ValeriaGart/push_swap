@@ -6,7 +6,7 @@
 /*   By: vharkush <vharkush@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:15:48 by vharkush          #+#    #+#             */
-/*   Updated: 2023/05/26 16:03:58 by vharkush         ###   ########.fr       */
+/*   Updated: 2023/05/28 10:16:46 by vharkush         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ void	ft_rotate(int *stack, int n, char cond)
 		write(1, "ra\n", 3);
 	if (cond == 'b')
 		write(1, "rb\n", 3);
-	if (cond == 'r')
-		write(1, "rr\n", 3);
 }
 
 void	ft_swap1(int *stack, char cond)
